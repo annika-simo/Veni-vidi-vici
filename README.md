@@ -1,78 +1,73 @@
 # Veni-vidi-vici
 CS1021 Lab 5
 
-Introduction:
+## Introduction
 Since the beginning of time people have sent messages that they only wanted the intended recipient to understand. Sometimes the speaker would tell the message to a trusted courier who would deliver the message to the speaker's counterpart. Sometimes the writer would mail a letter and seal it with a wax stamp to indicate to the reader whether the message had been opened in transit. No matter the mechanism, there have always been people who wanted to keep certain communications secret.
 
-And, for as long as there have been secrets, there have been people dedicated to exposing them. The battle between the coy and the nosy has been fought back and forth throughout the ages. Whether by hiding the truth or using trusted intermediaries, early furtive senders would rely on surreptitiousness to keep a message secret. The technique of "security through obscurity (Links to an external site.)" did not hold up long when exposed to dedicated adversaries.
+And, for as long as there have been secrets, there have been people dedicated to exposing them. The battle between the coy and the nosy has been fought back and forth throughout the ages. Whether by hiding the truth or using trusted intermediaries, early furtive senders would rely on surreptitiousness to keep a message secret. The technique of "[security through obscurity](https://en.wikipedia.org/wiki/Security_through_obscurity)" did not hold up long when exposed to dedicated adversaries.
 
-What the secretive sender needed to communicate with the reluctant reader was a method of communicating that could protect the information whether a spy knew the means for its protection or not. In other words, the sender and receiver had to assume that the spy knew the method by which they were keeping a secret and still be able to communicate privately. The need led to the development of encryption.
+What the secretive sender needed to communicate with the reluctant reader was a method of communicating that could protect the information whether a spy knew the means for its protection or not. In other words, the sender and receiver had to assume that the spy knew the method by which they were keeping a secret and still be able to communicate privately. The need led to the development of *encryption*.
 
-Encryption/decryption methods are known as schemes. In an encryption/decryption scheme, there is an algorithm for taking the original message (the plaintext) and transforming it to something that an eavesdropper can't understand (the ciphertext). This process is known as encryption and is performed by the sender. In an encryption/decryption scheme, there is a corresponding algorithm for taking the ciphertext and reversing the encryption -- the process is known as decryption and is performed by the receiver.
+Encryption/decryption methods are known as schemes. In an encryption/decryption scheme, there is an algorithm for taking the original message (the plaintext) and transforming it to something that an eavesdropper can't understand (the *ciphertext*). This process is known as encryption and is performed by the sender. In an encryption/decryption scheme, there is a corresponding algorithm for taking the ciphertext and reversing the encryption -- the process is known as decryption and is performed by the receiver.
 
-Encryption/decryption schemes are publicly known, well documented and standardized (Links to an external site.). If the methods of encryption and decryption are known, why can't the sender's foes use that information to recover the plaintext? Because encryption/decryption schemes usually rely on the sender and the intended recipient sharing some data that is used to configure the encryption/decryption scheme in a particular way. The data shared between communicating parties that can be used to configure the encryption/decryption scheme is called a key.
+Encryption/decryption schemes are publicly known, well documented and [standardized](https://csrc.nist.gov/Projects/cryptographic-standards-and-guidelines). If the methods of encryption and decryption are known, why can't the sender's foes use that information to recover the plaintext? Because encryption/decryption schemes usually rely on the sender and the intended recipient sharing some data that is used to configure the encryption/decryption scheme in a particular way. The data shared between communicating parties that can be used to configure the encryption/decryption scheme is called a *key*.
 
-Untitled drawing(1).png
+Using a good encryption/decryption scheme and key to protect a message means that the sunglassed snooper has no way of knowing the contents of the message *even if they know the algorithm used to protect the message*.
 
-Using a good encryption/decryption scheme and key to protect a message means that the sunglassed snooper has no way of knowing the contents of the message even if they know the algorithm used to protect the message.
-
-One of the earliest encryption schemes was employed by Julius Caesar (Links to an external site.) to keep his messages safe. A type of substitution cipher, the sender and receiver agree on the key -- a shift number and direction (left or right) -- and, to encrypt, the sender shifts each letter in the plaintext in the chosen direction and by the number of spaces indicated by the shift number to create the ciphertext and, to decrypt, the receiver shifts each letter in the ciphertext in the opposite direction and same amount to restore the plaintext. It is called a substitution cipher because each letter in the plaintext is substituted for a letter in the ciphertext.
-
-Untitled drawing(3).png
-
-Figure 1: Substituting characters in plaintext for ciphertext when using a key with a shift number of 3 and right direction.
+One of the earliest encryption schemes was employed by [Julius Caesar](https://en.wikipedia.org/wiki/Caesar_cipher) to keep his messages safe. A type of substitution cipher, the sender and receiver agree on the key -- a shift number and direction (left or right) -- and, to encrypt, the sender shifts each letter in the plaintext in the chosen direction and by the number of spaces indicated by the shift number to create the ciphertext and, to decrypt, the receiver shifts each letter in the ciphertext in the opposite direction and same amount to restore the plaintext. It is called a substitution cipher because each letter in the plaintext is substituted for a letter in the ciphertext.
 
 An example will help!
 
 Assume that I want to communicate with my parents. We would agree that I would encrypt my messages by shifting each letter 5 (the shift number) characters to the right (the direction). I would encrypt the message "hello" as "mjqqt". Why? Because m is five letters to the right of h in the alphabet, j is five letters to the right of e in the alphabet, and so on. To be able to read the secured message, my parents would shift each letter of the ciphertext to the left by 5 and recover the original plaintext. Hello, indeed.
 
-Implementing the Caesar Cipher is done with modulo arithmetic and by equating each letter with a number according to its position in the alphabet. Assume that we have a function named number_from_letter that turns a letter into its position in the alphabet: a is 0, b is 1, c is 2, etc. For example, if we call number_from_letter with the argument d, the return value is 3.
+Implementing the Caesar Cipher is done with modulo arithmetic and by equating each letter with a number according to its position in the alphabet. Assume that we have a function named `number_from_letter` that turns a letter into its position in the alphabet: a is 0, b is 1, c is 2, etc. For example, if we call `number_from_letter` with the argument d, the return value is 3.
 
-Assume that we have another function named letter_from_number that turns a number between 0 and 25, inclusive, into a letter from the alphabet: 0 is a, 1 is b, 2 is c, etc. For example, if we call letter_from_number with the argument 1, the value of the expression is b. We can use these functions to come up with the ciphertext given the key and the direction.
+Assume that we have another function named `letter_from_number` that turns a number between 0 and 25, inclusive, into a letter from the alphabet: 0 is a, 1 is b, 2 is c, etc. For example, if we call `letter_from_number` with the argument 1, the value of the expression is b. We can use these functions to come up with the ciphertext given the key and the direction.
 
-What is the general process for encrypting a single character? Let's use a variable, c, to represent the plaintext letter that we are encrypting. Note carefully that we are using c as a variable to represent any character. We will name the result of a call to number_from_letter with the argument c the index of the plaintext letter. If the direction of encryption is right, we will add the shift number from the key to the index of the plaintext letter. That gives us a number that represents the position of the ciphertext character in the alphabet, what we will call the index of the ciphertext character. To get the actual ciphertext letter, we call the letter_from_number function with the index of the ciphertext letter as the argument. Voila, the result of that function call is the enciphered character.
+What is the general process for encrypting a single character? Let's use a variable, c, to represent the plaintext letter that we are encrypting. **Note carefully that we are using c as a variable to represent any character.** We will name the result of a call to `number_from_letter` with the argument c the index of the plaintext letter. If the direction of encryption is right, we will add the shift number from the key to the index of the plaintext letter. That gives us a number that represents the position of the ciphertext character in the alphabet, what we will call the index of the ciphertext character. To get the actual ciphertext letter, we call the `letter_from_number` function with the index of the ciphertext letter as the argument. Voila, the result of that function call is the enciphered character.
 
-If the direction of the encryption is left, we will subtract the key from the index of the plaintext letter. Otherwise, the process is the same!
+If the direction of the encryption is *left*, we will *subtract* the key from the index of the plaintext letter. Otherwise, the process is the same!
 
 That works fine for most cases. However, there are two corner cases that we have to consider.
 
-First, what happens if the index of the ciphertext character is past the end of the alphabet? For example, if we attempt to encrypt z with a shift number of 1 and a direction of right? We know that we want the ciphertext letter to be a. But, how do we calculate it algorithmically? Using the algorithm from above, we would calculate the index of the ciphertext character as 26 in this case. However, we can't call letter_from_number with an argument of 26 because our numbering scheme equates 25 with z! Despair! Wait: we can use our friend the modulus operator! Taking the index of the ciphertext character and "modding it" by 26, the number of characters in the alphabet, will solve the problem. In our example, 26 % 26 is 0 and that becomes the updated index of the ciphertext character. Using the updated index of the ciphertext character as the argument in the call to letter_from_function means, in our working example, that the ciphertext character is a. Just what we wanted!
+First, what happens if the index of the ciphertext character is past the end of the alphabet? For example, if we attempt to encrypt z with a shift number of 1 and a direction of right? We know that we want the ciphertext letter to be a. But, how do we calculate it algorithmically? Using the algorithm from above, we would calculate the index of the ciphertext character as 26 in this case. However, we can't call `letter_from_number` with an argument of 26 because our numbering scheme equates 25 with z! Despair! Wait: we can use our friend the modulus operator! Taking the index of the ciphertext character and "modding it" by 26, the number of characters in the alphabet, will solve the problem. In our example, 26 % 26 is 0 and that becomes the updated index of the ciphertext character. Using the updated index of the ciphertext character as the argument in the call to `letter_from_function` means, in our working example, that the ciphertext character is a. Just what we wanted!
 
-Second, what happens if we calculate an index of the ciphertext character that is less than 0? For example, if we attempt to encrypt the letter a with a key of 1 and a direction of left? Intuitively, we know that we want the ciphertext character to be z. But, how do we write a process to do it? Using the algorithm from above, we would calculate an index of the ciphertext character of -1 in this case. Uh oh, there is no letter of the alphabet equated with the number -1. To solve the problem, when the index of the ciphertext character is negative, let's overwrite it with an updated index of the ciphertext character calculated by subtracting the old index from the number of letters in the alphabet (26). Therefore, in the working example, the index of the ciphertext character becomes 25 (26 - 1). Using that updated index of the ciphertext character as the argument to letter_from_function means that the ciphertext character is z! Bingo!
+Second, what happens if we calculate an index of the ciphertext character that is less than 0? For example, if we attempt to encrypt the letter a with a key of 1 and a direction of left? Intuitively, we *know* that we want the ciphertext character to be z. But, how do we write a process to do it? Using the algorithm from above, we would calculate an index of the ciphertext character of -1 in this case. Uh oh, there is no letter of the alphabet equated with the number -1. To solve the problem, when the index of the ciphertext character is negative, let's overwrite it with an updated index of the ciphertext character calculated by subtracting the old index from the number of letters in the alphabet (26). Therefore, in the working example, the index of the ciphertext character becomes 25 (26 - 1). Using that updated index of the ciphertext character as the argument to `letter_from_function` means that the ciphertext character is z! Bingo!
 
-In this lab, you will develop an encryption program named 1d3s to read in a key and plaintext message from a file and print the encrypted version which will be safe from
-prying eyes (Links to an external site.)
-.
+In this lab, you will develop an encryption program named 1d3s to read in a key and plaintext message from a file and print the encrypted version which will be safe from [prying eyes](https://www.youtube.com/watch?v=2PTEqZURh4o).
 
 As always, read the entire lab document before beginning!
 
 Good luck!
 
-Program Design Task:
+## Program Design Task
 As my dad always said, “If you want something done wrong, you have do it yourself.” Before you start writing code, please write the pseudocode or draw a flow chart for your implementation of the 1d3s application.
 
-Program Design Requirements:
+## Program Design Requirements
 Your pseudocode or flow chart must describe the entirety of the solution. You may choose to write the flow chart or the pseudocode at any level of detail but remember that this is a tool for you! Your pseudocode or flow chart must include a description of how you plan to
+1. Read in the encryption key (shift number and direction) and plaintext from a file,
+2. Handle any errors in the formatting of the input file,
+3. For each character in the plaintext
+   1. Calculate the index of the plaintext character,
+   2. Calculate the index of the ciphertext character,
+   3. Handle situations where the index of the ciphertext character is longer than the alphabet,
+   4. Handle the situation where the index of the ciphertext character is shorter than the alphabet,
+   5. convert the (possibly adjusted) index of the ciphertext character to the actual ciphertext character, and
+4. Print the ciphertext to the screen.
 
-Read in the encryption key (shift number and direction) and plaintext from a file,
-Handle any errors in the formatting of the input file,
-For each character in the plaintext
-Calculate the index of the plaintext character,
-Calculate the index of the ciphertext character,
-Handle situations where the index of the ciphertext character is longer than the alphabet,
-Handle the situation where the index of the ciphertext character is shorter than the alphabet,
-convert the (possibly adjusted) index of the ciphertext character to the actual ciphertext character, and
-Print the ciphertext to the screen.
-Programming Task:
-Your programming task is to implement the 1d3s application. In this lab you will not prompt the user for input. You will read all input from a file named input.txt. Like Lab 4, a skeleton file is provided (below) and you must use the skeleton.
+## Programming Task
+Your programming task is to implement the *1d3s* application. In this lab you will not prompt the user for input. You will read all input from a file named `input.txt`. Like Lab 4, a skeleton file is provided (below) and you *must* use the skeleton.
 
 The input file will be formatted like so:
 
-<l or r><shift number (an integer)><first character of plaintext><second character of plaintext>...<last character of plaintext>
+<`l` or `r`><shift number (an integer)><first character of plaintext><second character of plaintext>...<last character of plaintext>
 
-The first character is the direction (l for left and r for right) and the number is the shift number. For example, an input file might contain:
+The first character is the direction (`l` for left and `r` for right) and the number is the shift number. For example, an input file might contain:
 
+```
 l4hello
+```
+  
 which would tell 1d3s that the encryption direction is left and that the key is four (4).
 
 Your program will calculate the ciphertext and print it to the screen on a single line. For example, if you run 1d3s with an input file whose contents are
