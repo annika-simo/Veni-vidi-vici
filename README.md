@@ -70,74 +70,96 @@ l4hello
   
 which would tell 1d3s that the encryption direction is left and that the key is four (4).
 
-Your program will calculate the ciphertext and print it to the screen on a single line. For example, if you run 1d3s with an input file whose contents are
+Your program will calculate the ciphertext and print it to the screen on a single line. For example, if you run *1d3s* with an input file whose contents are
 
+```
 l4hello
+```
+   
 the output would be
 
+```
 dahhk
-As another example, if you run 1d3s with a file whose contents are
+```
+As another example, if you run *1d3s* with a file whose contents are
 
+```
 l28goodbye
+```
+   
 the output would be
 
+```
 emmbzwc
-The 1d3s program must also properly handle input files that are improperly encoded. If there is no direction provided, 1d3s must output
+```
+   
+The 1d3s program must also properly handle input files that are improperly encoded. If there is no direction provided, *1d3s* must output
 
+```
 Oops: Could not read the direction from the input file.
-If the first character in the file is not an l or an r, 1d3s must output
+```
+   
+If the first character in the file is not an `l` or an `r`, *1d3s* must output
 
+```
 Oops: Invalid direction in the input file.
-If there is no shift number provided, 1d3s must output
+```
+   
+If there is no shift number provided, *1d3s* must output
 
+```
 Oops: Could not read the shift number from the input file.
-You may test your code using these test input files: one  Download one, two  Download two, three  Download three, four  Download four, five  Download five.
+```
+   
+You may test your code using the test input files provided.
 
-To check whether your program is operating correctly, you may want to use one of these online Caesar (Links to an external site.) Cipher (Links to an external site.) implementations (Links to an external site.).
+To check whether your program is operating correctly, you may want to use one of these online [Caesar](https://www.dcode.fr/caesar-cipher) [Cipher](https://cryptii.com/pipes/caesar-cipher) [implementations](http://practicalcryptography.com/ciphers/caesar-cipher/).
 
-Note: Your program will be tested against other test cases. Your program must compute properly in all cases in order to receive full points! Check the output of the autograder to make sure that your program behaves as expected. Read the autograder's output carefully!
+*Note:* Your program will be tested against other test cases. Your program must compute properly in all cases in order to receive full points! Check the output of the autograder to make sure that your program behaves as expected. Read the autograder's output carefully!
 
-Programming Requirements:
-Start with this skeleton  Download skeleton(if you are a Mac user, use this skeleton  Download this skeleton) that provides the functions you will need to use to successfully complete this lab. If you do not use this skeleton code you will not be able to complete this lab. The skeleton code contains two useful functions:
+## Programming Requirements
+Start with the skeleton .zip in this repository that provides the functions you will need to use to successfully complete this lab. If you do not use this skeleton code you will not be able to complete this lab. The skeleton code contains two useful functions:
 
-number_from_letter: This function takes a single parameter, a character. The output from the function is an integer according to the equation between number and letters described in the introduction (above).
-letter_from_number: This function takes a single parameter, an integer. The output from the function is a character according to the equation between number and letters described in the introduction (above).
+- `number_from_letter`: This function takes a single parameter, a character. The output from the function is an integer according to the equation between number and letters described in the introduction (above).
+- `letter_from_number`: This function takes a single parameter, an integer. The output from the function is a character according to the equation between number and letters described in the introduction (above).
+   
 You may make the following assumptions:
-
-The file input.txt will always be available and readable.
-The plaintext will be entirely lowercase.
-The plaintext will only contain valid alphabetic letters.
-The plaintext will contain no numbers.
+1. The file input.txt will always be available and readable.
+2. The plaintext will be entirely lowercase.
+3. The plaintext will only contain valid alphabetic letters.
+4. The plaintext will contain no numbers.
+   
 You must use the provided constant anywhere that you need to use 26, the number of letters in the alphabet.
 
-Critical Thinking Task:
-We talked in class about an interesting property of the for loop: Every for loop can be rewritten as a while loop. How cool is that? Your Critical Thinking Task is to describe (graphically or textually) a mechanical (algorithmic) process for converting between for loops and while loops. You may use any means you choose to describe the transformation. Bonus points may be awarded for creative presentations. You may use the following terminology to refer to different parts of the for loop when describing the conversion:
+## Critical Thinking Task
+We talked in class about an interesting property of the `for` loop: Every `for` loop can be rewritten as a `while` loop. How cool is that? Your Critical Thinking Task is to describe (graphically or textually) a mechanical (algorithmic) process for converting between `for` loops and `while` loops. You may use any means you choose to describe the transformation. Bonus points may be awarded for creative presentations. You may use the following terminology to refer to different parts of the for loop when describing the conversion:
 
+```
 for (initialization statement; condition expression; update expression) {
   body
 }
-Critical Thinking Requirement:
+```
+   
+## Critical Thinking Requirement
 As stated above, you may use any means you choose to describe the transformation between for loops and while loops. You must describe the transformation process generally -- you cannot simply describe how you would translate a particular for loop into a particular while loop. Bonus points may be awarded for creative presentations at the discretion of the professor and TAs.
 
-Deliverables:
-The pseudocode describing the algorithm of your 1d3s program in PDF format (named design.pdf).
-The C++ source code for your 1d3s application (named 1d3s.cpp).
-A written response to the Critical Thinking Task prompt in PDF format (named equivalent.pdf). If you chose to satisfy the Critical Thinking Task using a means that is not easily transmissible as a PDF, please upload an appropriately named PDF with instructions on how to access your masterpiece!
+## Deliverables
+1. The pseudocode describing the algorithm of your 1d3s program in PDF format (named design.pdf).
+2. The C++ source code for your 1d3s application (named 1d3s.cpp).
+3. A written response to the Critical Thinking Task prompt in PDF format (named equivalent.pdf). If you chose to satisfy the Critical Thinking Task using a means that is not easily transmissible as a PDF, please upload an appropriately named PDF with instructions on how to access your masterpiece!
 
-Code is appropriately commented to match the solution's pseudocode and variables are given appropriate/meaningful names.
-Related Learning Objectives:
-Writing boolean expressions using relational and logical operators
-Using if-statements to implement selective program execution
-Using algorithmic thinking to design programs
-Write syntactically correct for, while and do-while loops
-Identify the components of for, while and do-while loops
-Understand the difference between pre- and post-test loops
-Use each of the three types of loops in the appropriate situation
-Use methods on file stream objects to read/write files
-Credits
-writer by Kamin Ginkaew from the Noun Project
+## Related Learning Objectives
+1. Writing boolean expressions using relational and logical operators
+2. Using if-statements to implement selective program execution
+3. Using algorithmic thinking to design programs
+4. Write syntactically correct for, while and do-while loops
+5. Identify the components of for, while and do-while loops
+6. Understand the difference between pre- and post-test loops
+7. Use each of the three types of loops in the appropriate situation
+8. Use methods on file stream objects to read/write files
 
-writer by Smashing Stocks from the Noun Project
-
-reader by Komkrit Noenpoempisut from the Noun Project
+## Credits
+- writer by Kamin Ginkaew from the Noun Project
+- writer by Smashing Stocks from the Noun Project
+- reader by Komkrit Noenpoempisut from the Noun Project
 
